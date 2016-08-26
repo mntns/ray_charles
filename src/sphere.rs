@@ -16,26 +16,24 @@ impl Sphere {
 }
 
 impl Hitable for Sphere {
-    fn hit(&self, r: &Ray, t_min: f64, t_max: f64, rec: &mut HitRecord) -> bool {
+    fn hit(&self, r: &Ray, t_min: &f64, t_max: &f64, rec: &mut HitRecord) -> bool {
         let oc = r.origin - self.center;
 
-        let direction = r.direction;
-
-        let a: f64 = direction.dot(&direction);
-        let b: f64 = oc.dot(&direction);
+        let a: f64 = r.direction.dot(&r.direction);
+        let b: f64 = oc.dot(&r.direction);
         let c: f64 = oc.dot(&oc) - self.radius*self.radius;
 
         let discriminant = b*b - a*c;
         if discriminant > 0.0 {
             let mut temp = (-b - discriminant.sqrt()) / a;
-            if temp < t_max && temp > t_min {
+            if temp < *t_max && temp > *t_min {
                 rec.t = temp;
                 rec.p = r.point_at_parameter(rec.t);
                 rec.normal = (rec.p - self.center) / self.radius;
                 return true;
             }
             temp = (-b + discriminant.sqrt()) / a;
-            if temp < t_max && temp > t_min {
+            if temp < *t_max && temp > *t_min {
                 rec.t = temp;
                 rec.p = r.point_at_parameter(rec.t);
                 rec.normal = (rec.p - self.center) / self.radius;

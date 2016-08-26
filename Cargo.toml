@@ -5,3 +5,5 @@ authors = ["Eddy Shure <github@monoton.space>"]
 
 [dependencies]
 nalgebra = "0.9.0"
+rand = "0.3"
+backtrace = "0.2"
