@@ -2,12 +2,11 @@ extern crate nalgebra as na;
 extern crate rand;
 extern crate backtrace;
 
-use na::{Vector3, Dot};
+use na::{Vector3, Dot, Norm};
 use rand::Rng;
 
 pub fn unit_vector(vec: Vector3<f64>) -> Vector3<f64> {
-    let len = vec.len() as f64;
-    Vector3::new(vec.x / len, vec.y / len, vec.z / len)
+    vec * (1.0 / vec.norm())
 }
 
 pub fn random_in_unit_sphere() -> Vector3<f64> {
