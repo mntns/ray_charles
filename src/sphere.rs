@@ -38,8 +38,8 @@ impl Hitable for Sphere {
             None
         } else {
             let ds = discriminant.sqrt();
-            let temp_neg = (0.0 - b - ds) / (2.0 * a);
-            let temp_pos = (0.0 - b + ds) / (2.0 * a);
+            let temp_neg = (-b - ds) / (2.0 * a);
+            let temp_pos = (-b + ds) / (2.0 * a);
             let temp = if temp_neg < *t_max && temp_neg > *t_min {
                 Some(temp_neg)
             } else if temp_pos < *t_max && temp_pos > *t_min {
