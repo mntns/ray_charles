@@ -11,7 +11,7 @@ pub fn unit_vector(vec: Vector3<f64>) -> Vector3<f64> {
 }
 
 pub fn random_in_unit_sphere() -> Vector3<f64> {
-    let mut p = Vector3::new(0.0, 0.0, 0.0);
+    let mut p = Vector3::new(1.0, 1.0, 1.0);
     let mut rng = rand::thread_rng();
     while na::norm_squared(&p) >= 1.0 {
         p = 2.0 * Vector3::new(rng.gen::<f64>(), rng.gen::<f64>(), rng.gen::<f64>()) -
