@@ -9,15 +9,15 @@ use material::Material;
 pub struct Sphere {
     center: Vector3<f64>,
     radius: f64,
-    material: Arc<Material>
+    material: Arc<Material>,
 }
 
 impl Sphere {
     pub fn new(center: Vector3<f64>, radius: f64, material: Arc<Material>) -> Self {
-        Sphere { 
-            center: center, 
-            radius: radius, 
-            material: material
+        Sphere {
+            center: center,
+            radius: radius,
+            material: material,
         }
     }
 }
@@ -30,11 +30,11 @@ impl Hitable for Sphere {
         let oc = r.origin - self.center;
 
         let a: f64 = r.direction.dot(&r.direction);
-        let b: f64 = oc.dot(&r.direction);
-        let c: f64 = oc.dot(&oc) - self.radius*self.radius;
+        let b: f64 = 2.0 * r.direction.dot(&oc);
+        let c: f64 = oc.dot(&oc) - self.radius * self.radius;
 
-        let discriminant = b*b - a*c;
-        if discriminant < 0.0 {
+        let discriminant = b * b - 4.0 * a * c;
+        if discriminant <= 0.0 {
             None
         } else {
             let ds = discriminant.sqrt();
